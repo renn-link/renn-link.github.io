@@ -13,8 +13,8 @@
     <title>Link&#39;s personal hut</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fluid-dev/hexo-theme-fluid@1.5.0/source/lib/font-awesome/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fluid-dev/hexo-theme-fluid@1.5.0/source/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/zoom.css">
-    <link rel="stylesheet" href="/assets/css/main.css?v=201911072">
+    <link rel="stylesheet" href="/assets/css/viewer.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css?v=20200101">
 </head>
 
 <body style="background: url('https://s2.ax1x.com/2019/12/27/lVFt5F.jpg')no-repeat center center;background-size: cover;background-color: #0a0a0a;">
@@ -54,7 +54,7 @@
                 <div class="rgba-black-light flex-center">
                     <div class="scroll-down-bar" style="flex-direction: column">
                         <ul style="list-style: none;text-align: center;">
-                            <li><img class="scroll-down-mouse" src="/assets/image/mouse、.png"></li>
+                            <li><img class="scroll-down-mouse" src="/assets/image/mouse.png"></li>
                             <li><img class="scroll-down-arrow" src="/assets/image/arrow.png"></li>
                             <!-- <i class="fa fa-arrow-down scroll-down-arrow"></i> -->
                         </ul>
@@ -76,7 +76,7 @@
                     <div class="grid-sizer"></div>
                     
                     <div class="recentitem c-2 r-1">
-                        <div class="img" data-url="https://s2.ax1x.com/2019/12/29/lu8ZV0.md.jpg"></div>
+                        <div class="img" data-url="https://s2.ax1x.com/2019/12/29/lu8ZV0.jpg"></div>
                         <div class="mask">
                             <div>
                                 <span>Nightmare_The Call of Cthulhu</span>
@@ -164,21 +164,22 @@
     <img class="z-depth-1" id="scroll-top-button" src="/assets/image/backtop_hover.png" style="cursor: pointer;display:none; bottom: 100px; right: 100px;">
 
     <footer class="footer">
-        <nav class="d-flex">
-            <ul class="social-icons">
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-            </ul>
-        </nav>
-    </footer>
+    <nav class="d-flex">
+        <ul class="social-icons">
+            <li><a href="mailto:pandorawing@gmail.com"><i class="fab fa-google"></i></a></li>
+            <li><a href="https://www.instagram.com/renn_link"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fab fa-weibo"></i></a></li>
+            <li><a href="https://github.com/renn-link"><i class="fab fa-github"></i></a></li>
+        </ul>
+    </nav>
+</footer>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0/dist/smooth-scroll.polyfills.min.js"></script>
     <script src="/assets/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
     <script src="/assets/js/isotope.pkgd.min.js"></script>
-    <script src="/assets/js/zoom.min.js"></script>
+    <script src="/assets/js/viewer.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <script>
         $('.recentcontainer').isotope({
@@ -202,7 +203,19 @@
                     var style = "url('" + url + "') no-repeat center center";
                     $(el).css('background', style);
                     $(el).css('background-size', 'cover');
+                    $(el).append('<img src="' + url + '" style="display:none"/>');
                 }
+            });
+
+            var pictures = document.querySelector('.recentcontainer');
+            var options = {
+                // inline: true,
+                container: '#recent',
+                url: 'src'
+            };
+            var viewer = new Viewer(pictures, options);
+            $('.recentitem').on('click', function(e) {
+                viewer.view($('.recentitem').index(this));
             });
         })
     </script>
